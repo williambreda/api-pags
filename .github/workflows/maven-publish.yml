@@ -73,3 +73,5 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_6a5a69615b684968a0138c089850c46e }}
           images: 'docker.io/${{ secrets.AzureAppService_ContainerUsername_c54172b6bad04613ae2cb1508d9f7fdd }}/williambreda/api-pags:${{ github.sha }}'
+
+
