@@ -62,4 +62,4 @@ jobs:
         app-name: 'API-pags'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_15d3113aeffb4aaba42735af3689045b }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_bfc5183be52847618318bfb338dfda02 }}/docker.io/williambreda/williambreda/api-pags:${{ github.sha }}'
+        images: 'index.docker.io/williambreda/api-pags:${{ github.sha }}'
