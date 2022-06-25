@@ -85,6 +85,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>api-pags</finalName>
     </build>
 
 </project>
