@@ -1,6 +1,6 @@
-# Prova técnica API
+# API Pags - Desafio Técnico
 
-Este é o projeto de API que deve ser automatizado para o desafio.
+Este é o projeto de API utilizado para o desafio técnico.
 
 ##  Requisitos
  * Java 8+ JDK deve estar instalado
