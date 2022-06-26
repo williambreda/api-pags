@@ -84,8 +84,9 @@ jobs:
         run: mvn -B test --file pom.xml
         continue-on-error: true
 
-      - name: Allure Reports
-        uses: actions/checkout@v3
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
         if: always()
         continue-on-error: true
         with:
