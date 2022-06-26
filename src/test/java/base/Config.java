@@ -14,14 +14,15 @@ public abstract class Config {
     @BeforeAll
     public static void setUp() {
 
-        baseURI = "http://localhost";
+        baseURI = "https://api-pags.azurewebsites.net";
         basePath = "/api/v1";
-        port = 8080;
+        //port = 8080;
         config = newConfig().
                 jsonConfig(jsonConfig().numberReturnType(NumberReturnType.BIG_DECIMAL)).
                 sslConfig(new SSLConfig().allowAllHostnames());
 
         RestAssured.useRelaxedHTTPSValidation();
+
 
     }
 }
