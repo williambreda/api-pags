@@ -17,5 +17,4 @@ jobs:
 
     steps:
       - name: Test with Maven
-        uses: actions/checkout@v3
-        run: mvn -B package --file pom.xml
+        run: mvn test
