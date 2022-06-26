@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "erros"
+  ],
+  "properties": {
+    "erros": {
+      "type": "object",
+      "required": [
+        "parcelas",
+        "email"
+      ],
+      "properties": {
+        "valor": {
+          "type": "string"
+        },
+        "parcelas": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
