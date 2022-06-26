@@ -64,5 +64,3 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_15d3113aeffb4aaba42735af3689045b }}
         images: 'index.docker.io/williambreda/api-pags:${{ github.sha }}'
 
-
-
