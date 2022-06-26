@@ -15,10 +15,12 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-      - name: Test with Maven
+      - name: Prepare for Test
         with:
           java-version: '8'
           distribution: 'temurin'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-          run: mvn test
+
+      - name: Test with Maven
+        run: mvn test
