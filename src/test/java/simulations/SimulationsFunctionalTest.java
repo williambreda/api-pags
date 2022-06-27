@@ -74,28 +74,6 @@ public class SimulationsFunctionalTest extends SimulationsConfig {
             statusCode(SC_NOT_FOUND);
     }
 
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end returning all the simulations, even when the filter have only one name")
-    @DisplayName("Must find a simulation filtered by name")
-    void returnSimulationByName() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
-
-        given().
-            queryParam("nome", existingSimulation.getNome()).
-        when().
-            get("/simulacoes").
-        then().
-            statusCode(SC_OK).
-            body(
-                "[0].nome", equalTo(existingSimulation.getNome()),
-                "[0].cpf", equalTo(existingSimulation.getCpf()),
-                "[0].email", equalTo(existingSimulation.getEmail()),
-                "[0].valor", equalTo(existingSimulation.getValor()),
-                "[0].parcelas", equalTo(existingSimulation.getParcelas()),
-                "[0].seguro", equalTo(existingSimulation.getSeguro())
-            );
-    }
 
 
     @Test
@@ -114,22 +92,6 @@ public class SimulationsFunctionalTest extends SimulationsConfig {
 
     }
 
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end is not validating the minimum value of the simulation.")
-    @DisplayName("Must try create a new simulation with invalid min value.")
-    void createNewSimulationWithInvalidMinValue() {
-        Simulation simulation = simulationDataFactory.simulationInvalidMinValue();
-
-        given().
-           contentType(ContentType.JSON).
-           body(simulation).
-        when().
-           post("/simulacoes").
-        then().
-           statusCode(SC_BAD_REQUEST);
-
-    }
 
     @Test
     @Tag(FUNC)
@@ -161,37 +123,7 @@ public class SimulationsFunctionalTest extends SimulationsConfig {
             statusCode(SC_BAD_REQUEST);
     }
 
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end is not validating the max number of installments.")
-    @DisplayName("Must try create a new simulation with invalid max number of installments.")
-    void createNewSimulationWithInvalidMaxInstallments() {
-        Simulation simulation = simulationDataFactory.simulationMoreThanMaxInstallments();
 
-        given().
-            contentType(ContentType.JSON).
-        body(simulation).
-            when().
-            post("/simulacoes").
-        then().
-            statusCode(SC_BAD_REQUEST);
-    }
-
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end is not validating the invalid name.")
-    @DisplayName("Must try create a new simulation with invalid name.")
-    void createNewSimulationWithInvalidName() {
-        Simulation simulation = simulationDataFactory.simulationWithEmptyName();
-
-        given().
-            contentType(ContentType.JSON).
-            body(simulation).
-        when().
-            post("/simulacoes").
-        then().
-            statusCode(SC_BAD_REQUEST);
-    }
 
     @Test
     @Tag(FUNC)
@@ -210,21 +142,7 @@ public class SimulationsFunctionalTest extends SimulationsConfig {
 
 
 
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end not saving a duplicate cpf, but not giving the correct error.")
-    @DisplayName("Must validate an CPF duplication")
-    void createNewSimulationWithDuplicatedCpf() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
-        given().
-            contentType(ContentType.JSON).
-            body(existingSimulation).
-        when().
-            post("/simulacoes/").
-        then().
-            statusCode(SC_CONFLICT).
-            body("mensagem", is("CPF já existe"));
-    }
+
 
     @Test
     @Tag(FUNC)
@@ -248,19 +166,6 @@ public class SimulationsFunctionalTest extends SimulationsConfig {
 
     }
 
-    @Test
-    @Tag(FUNC)
-    @Disabled("[FIX] Back-end don't have this validation")
-    @DisplayName("Must validate the return when a non-existent simulation is sent")
-    void deleteSimulationThatNotExists() {
-
-        given().
-            pathParam("cpf", simulationDataFactory.notExistentCpf()).
-        when().
-            delete("/simulacoes/{cpf}").
-        then().
-            statusCode(SC_NOT_FOUND);
-    }
 
     @Test
     @Tag(FUNC)

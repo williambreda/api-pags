@@ -33,7 +33,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().
-                title("Simulação de Crédito").
+                title("Simulação de Crédito - Pags").
                 description("Aplicação para simular a tomada de empréstimo").
                 build();
     }
