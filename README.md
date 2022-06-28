@@ -1,67 +1,73 @@
-# API Pags - Desafio Técnico
+# API Pags - Technical Challenge
 
-Este é o projeto de API utilizado para o desafio técnico, a mesma se encontra publicada na cloud da Azure:
+This is the API project used for the technical challenge, it is published on the Azure cloud:
 
 https://api-pags.azurewebsites.net/swagger-ui.html#
 
-##  Requisitos para rodar local
- * Java JDK 11 deve estar instalado
- * Maven deve estar instalado e configurado no path da aplicação
+##  Requirements to run local
+ * Java JDK 11 must be installed
+ * Maven must be installed and configured in the application path
  
-## Como executar a aplicação 
+## How to run the application
 
-Na raiz do projeto, através de seu Prompt de Commando/Terminal/Console execute o comando 
+At the project root, through your Commando/Terminal/Console Prompt run the command 
 
 ```bash
 mvn clean spring-boot:run
 ```
 
 
-A aplicação estará disponível através da URL [http://localhost:8080](http://localhost:8080)
+The application will be available via the URL [http://localhost:8080](http://localhost:8080)
 
-Você pode trocar a porta da aplicação, caso a _8080_ já estiver em uso, adicionando a propriedade JVM `server.port`.
+You can change the application port, if _8080_ is already in use, by adding the JVM property `server.port`.
 
-Exemplo:
+Example:
 
 ```bash
 mvn clean spring-boot:run -Dserver.port=8888
 ```
-## Como executar a suíte de testes:
+## How to run the test suite:
 
-Rodar somente os testes com a tag designada:
+Run only tests with the designated tag:
+
 ```sh
 mvn test -Dgroups="functional"
 ```
 ```sh
 mvn test -Dgroups="contract"
 ```
-Ou para rodar a suíte completa, independente da tag associada:
+Or to run the complete suite, regardless of the associated tag:
+
 ```sh
 mvn test
 ```
 
-## Reports da execução dos testes
-O relatório da execução dos testes fica armazenado no github a cada job no qual ele roda:
+## Test execution reports
+The test execution report is stored on github for each job in which it runs:
+
 
 https://williambreda.github.io/api-pags
 
-## Documentacão técnica da aplicação
+## Application technical documentation
 
-A documentação técnica da API está disponível através do OpenAPI/Swagger em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) ou
+API technical documentation is available through OpenAPI/Swagger at
+ [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) ou
 [https://api-pags.azurewebsites.net/swagger-ui.html#/](https://api-pags.azurewebsites.net/swagger-ui.html#/)
 
-## Regras
+## Rules
 
-### Restrições
+### Restrictions
 
 `GET <host>/api/v1/restricoes/{cpf}`
 
-O endpoint de Restrições tem a finalidade de consultar o CPF informando, retornando se ele possui ou não uma restrição. 
+The Restrictions endpoint is intended to query the CPF informing, returning whether or not it has a restriction.
 
-* Se não possui restrição do HTTP Status 204 é retornado
-* Se possui restrição o HTTP Status 200 é retornado com a mensagem "O CPF 99999999999 possui restrição"
 
-#### CPFs com restrição
+* If there is no restriction, HTTP Status 204 is returned
+* If there is restriction, HTTP Status 200 is returned with the message "The CPF 99999999999 has restriction"
+
+
+#### CPFs with restriction
 
 | CPF |
 | ----|
@@ -76,67 +82,61 @@ O endpoint de Restrições tem a finalidade de consultar o CPF informando, retor
 | 24094592008 |
 | 58063164083 |
 
-### Simulações
+### Simulations
 
-A simulação é um cadastro que ficará registrado informações importantes sobre o crédito como valor, parcelas, 
-dados de contato, etc...
+The simulation is a register that will record important information about the credit such as value, installments,
+contact details, etc.
 
-### Criar uma simulação
+### Create a simulation
 
 `POST <host>/api/v1/simulacoes`
 
-Este endpoint é responsável por inserir uma nova simulação.
+This endpoint is responsible for inserting a new simulation.
 
-Existem os seguintes atributos a serem informados, com suas respectivas regras:
+There are the following attributes to be informed, with their respective rules:
 
-| Atributo | Obrigatório? | Regra |
-|----------|--------------|-------|
-| cpf | sim | texto informando o CPF não no formato 999.999.999-99 |
-| nome | sim | texto informando o nome da pessoa |
-| email | sim | texto informado um e-mail válido |
-| valor | sim | valor da simulação que deve ser igual ou maior que R$ 1.000 e menor ou igual que R$ 40.000 |
-| parcela | sim | número de parcelas para pagamento que deve ser igual ou maior que 2 e menor ou igual a 48 |
-| seguro | sim | booleano `true` se com seguro e  `false` se sem seguro |
 
-* Uma simulação cadastrada com sucesso retorna o HTTP Status 201 e os dados inseridos como retorno
-* Uma simulação com problema em alguma regra retorna o HTTP Status 400 com a lista de erros
-* Uma simulação para um mesmo CPF retorna um HTTP Status 409 com a mensagem "CPF já existente"
+* A successfully registered simulation returns HTTP Status 201 and the data entered as a return
+* A simulation with a problem with some rule returns HTTP Status 400 with the list of errors.
+* A simulation for the same CPF returns an HTTP Status 409 with the message "CPF already exists".
 
-### Alterar uma simulação
+
+### Update a simulation
 
 `PUT <host>/api/v1/simulacoes/{cpf}`
 
-Altera uma simulação já existente, onde o CPF deve ser informado para que a alteração possa ser efetuada.
+Changes an existing simulation, where the CPF must be informed so that the change can be made.
 
-* A alteração pode ser feita em qualquer atributo da simulação
-* As mesmas regras se mantém
-* Se o CPF não possuir uma simulação o HTTP Status 404 é retornado com a mensagem "CPF não encontrado"
 
-### Consultar todas a simulações cadastradas
+* The change can be made to any attribute of the simulation
+* Same rules remain
+* If the CPF does not have a simulation, the HTTP Status 404 is returned with the message "CPF not found"
+
+
+### Consult all registered simulations
 
 `GET <host>/api/v1/simulacoes`
 
-Lista as simulações cadastradas.
+Lists the registered simulations.
 
-* Retorna a lista de simulações cadastradas e existir uma ou mais
-* Retorna HTTP Status 204 se não existir simulações cadastradas
+* Returns the list of registered simulations and there is one or more
+* Returns HTTP Status 204 if there are no simulations registered
 
+### Consult a simulation by CPF
 
-### Consultar uma simulação pelo CPF
 
 `GET <host>/api/v1/simulacoes/{cpf}`
 
-Retorna a simulação previamente cadastrada pelo CPF.
+Returns the simulation previously registered by the CPF.
 
-* Retorna a simulação cadastrada
-* Se o CPF não possuir uma simulação o HTTP Status 404 é retornado
+* Returns the registered simulation
+* If the CPF does not have a simulation, HTTP Status 404 is returned
 
-### Remover uma simulação
+### Remove a simulation
 
 `DELETE <host>/api/v1/simulacoes/{id}`
 
-Remove uma simulação previamente cadastrada pelo seu ID.
+Removes a simulation previously registered by its ID.
 
-* Retorna o HTTP Status 204 se simulação for removida com sucesso
-* Retorna o HTTP Status 404 com a mensagem "Simulação não encontrada" se não existir a simulação pelo ID informado
-
+* Returns HTTP Status 204 if simulation is successfully removed
+* Returns HTTP Status 404 with the message "Simulation not found" if there is no simulation by the given ID
