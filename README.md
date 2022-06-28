@@ -40,10 +40,15 @@ Ou para rodar a suíte completa, independente da tag associada:
 mvn test
 ```
 
+## Reports da execução dos testes
+O relatório da execução dos testes fica armazenado no github a cada job no qual ele roda:
+
+https://williambreda.github.io/api-pags
 
 ## Documentacão técnica da aplicação
 
-A documentação técnica da API está disponível através do OpenAPI/Swagger em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+A documentação técnica da API está disponível através do OpenAPI/Swagger em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) ou
+[https://api-pags.azurewebsites.net/swagger-ui.html#/](https://api-pags.azurewebsites.net/swagger-ui.html#/)
 
 ## Regras
 
