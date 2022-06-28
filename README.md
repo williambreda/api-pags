@@ -1,9 +1,11 @@
 # API Pags - Desafio Técnico
 
-Este é o projeto de API utilizado para o desafio técnico.
+Este é o projeto de API utilizado para o desafio técnico, a mesma se encontra publicada na cloud da Azure:
 
-##  Requisitos
- * Java 8+ JDK deve estar instalado
+https://api-pags.azurewebsites.net/swagger-ui.html#
+
+##  Requisitos para rodar local
+ * Java JDK 11 deve estar instalado
  * Maven deve estar instalado e configurado no path da aplicação
  
 ## Como executar a aplicação 
@@ -14,6 +16,7 @@ Na raiz do projeto, através de seu Prompt de Commando/Terminal/Console execute 
 mvn clean spring-boot:run
 ```
 
+
 A aplicação estará disponível através da URL [http://localhost:8080](http://localhost:8080)
 
 Você pode trocar a porta da aplicação, caso a _8080_ já estiver em uso, adicionando a propriedade JVM `server.port`.
@@ -23,6 +26,20 @@ Exemplo:
 ```bash
 mvn clean spring-boot:run -Dserver.port=8888
 ```
+## Como executar a suíte de testes:
+
+Rodar somente os testes com a tag designada:
+```sh
+mvn test -Dgroups="functional"
+```
+```sh
+mvn test -Dgroups="contract"
+```
+Ou para rodar a suíte completa, independente da tag associada:
+```sh
+mvn test
+```
+
 
 ## Documentacão técnica da aplicação
 
